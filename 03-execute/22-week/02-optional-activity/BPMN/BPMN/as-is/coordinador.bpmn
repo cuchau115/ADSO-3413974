@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_Coordinador" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.50.1">
+  <bpmn:collaboration id="Collab_Coordinador">
+    <bpmn:participant id="Participant_Coordinador" name="Gestion de Horarios" processRef="Process_Coordinador" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_Coordinador" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Coordinador">
+      <bpmn:lane id="Lane_Sistema" name="Sistema">
+        <bpmn:flowNodeRef>Task_DetectarConflictos</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Conflictos</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_PanelConflictos</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_PublicarHorario</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Coordinador" name="Coordinador">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Dashboard</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_HorarioExiste</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CrearBorrador</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AbrirHorario</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Sesiones</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Disponibilidad</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Ambientes</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ConfirmarPublicacion</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ConsultarFichas</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Credenciales válidas">
+      <bpmn:outgoing>Flow_Start_Dash</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_Dashboard" name="Revisar dashboard (estado general)">
+      <bpmn:incoming>Flow_Start_Dash</bpmn:incoming>
+      <bpmn:outgoing>Flow_Dash_GWExiste</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="GW_HorarioExiste" name="¿El horario ya existe?">
+      <bpmn:incoming>Flow_Dash_GWExiste</bpmn:incoming>
+      <bpmn:outgoing>Flow_GWExiste_Crear</bpmn:outgoing>
+      <bpmn:outgoing>Flow_GWExiste_Abrir</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_CrearBorrador" name="Crear borrador de horario">
+      <bpmn:incoming>Flow_GWExiste_Crear</bpmn:incoming>
+      <bpmn:outgoing>Flow_Crear_Sesiones</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_AbrirHorario" name="Abrir horario en edición">
+      <bpmn:incoming>Flow_GWExiste_Abrir</bpmn:incoming>
+      <bpmn:outgoing>Flow_Abrir_Sesiones</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Sesiones" name="Agregar / editar sesiones">
+      <bpmn:incoming>Flow_Crear_Sesiones</bpmn:incoming>
+      <bpmn:incoming>Flow_Abrir_Sesiones</bpmn:incoming>
+      <bpmn:incoming>Flow_Panel_Sesiones</bpmn:incoming>
+      <bpmn:incoming>Flow_GWAmb_Sesiones</bpmn:incoming>
+      <bpmn:outgoing>Flow_Sesiones_Detectar</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutAssoc_Borrador">
+        <bpmn:targetRef>DataObjectReference_Borrador</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
+    <bpmn:task id="Task_Disponibilidad" name="Consultar disponibilidad de ambientes">
+      <bpmn:incoming>Flow_GWConf_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_Disp_GWAmb</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="GW_Ambientes" name="¿Disponibilidad correcta?">
+      <bpmn:incoming>Flow_Disp_GWAmb</bpmn:incoming>
+      <bpmn:outgoing>Flow_GWAmb_Confirmar</bpmn:outgoing>
+      <bpmn:outgoing>Flow_GWAmb_Sesiones</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_ConfirmarPublicacion" name="Confirmar publicación">
+      <bpmn:incoming>Flow_GWAmb_Confirmar</bpmn:incoming>
+      <bpmn:outgoing>Flow_Confirmar_Publicar</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_ConsultarFichas" name="Consultar fichas e información relacionada">
+      <bpmn:incoming>Flow_Publicar_Fichas</bpmn:incoming>
+      <bpmn:outgoing>Flow_Fichas_End</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_1" name="Horario publicado">
+      <bpmn:incoming>Flow_Fichas_End</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="Task_DetectarConflictos" name="Detectar conflictos">
+      <bpmn:incoming>Flow_Sesiones_Detectar</bpmn:incoming>
+      <bpmn:outgoing>Flow_Detectar_GWConf</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="GW_Conflictos" name="¿Existen conflictos?">
+      <bpmn:incoming>Flow_Detectar_GWConf</bpmn:incoming>
+      <bpmn:outgoing>Flow_GWConf_Panel</bpmn:outgoing>
+      <bpmn:outgoing>Flow_GWConf_No</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_PanelConflictos" name="Mostrar panel de conflictos">
+      <bpmn:incoming>Flow_GWConf_Panel</bpmn:incoming>
+      <bpmn:outgoing>Flow_Panel_Sesiones</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_PublicarHorario" name="Publicar horario">
+      <bpmn:incoming>Flow_Confirmar_Publicar</bpmn:incoming>
+      <bpmn:outgoing>Flow_Publicar_Fichas</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutAssoc_Publicado">
+        <bpmn:targetRef>DataObjectReference_Publicado</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
+    <bpmn:dataObjectReference id="DataObjectReference_Borrador" name="Borrador de horario" dataObjectRef="DataObject_Borrador" />
+    <bpmn:dataObject id="DataObject_Borrador" />
+    <bpmn:dataObjectReference id="DataObjectReference_Publicado" name="Horario publicado" dataObjectRef="DataObject_Publicado" />
+    <bpmn:dataObject id="DataObject_Publicado" />
+    <bpmn:sequenceFlow id="Flow_Start_Dash" sourceRef="StartEvent_1" targetRef="Task_Dashboard" />
+    <bpmn:sequenceFlow id="Flow_Dash_GWExiste" sourceRef="Task_Dashboard" targetRef="GW_HorarioExiste" />
+    <bpmn:sequenceFlow id="Flow_GWExiste_Crear" name="No" sourceRef="GW_HorarioExiste" targetRef="Task_CrearBorrador" />
+    <bpmn:sequenceFlow id="Flow_GWExiste_Abrir" name="Sí" sourceRef="GW_HorarioExiste" targetRef="Task_AbrirHorario" />
+    <bpmn:sequenceFlow id="Flow_Crear_Sesiones" sourceRef="Task_CrearBorrador" targetRef="Task_Sesiones" />
+    <bpmn:sequenceFlow id="Flow_Abrir_Sesiones" sourceRef="Task_AbrirHorario" targetRef="Task_Sesiones" />
+    <bpmn:sequenceFlow id="Flow_Panel_Sesiones" sourceRef="Task_PanelConflictos" targetRef="Task_Sesiones" />
+    <bpmn:sequenceFlow id="Flow_GWAmb_Sesiones" name="No, ajustar sesiones" sourceRef="GW_Ambientes" targetRef="Task_Sesiones" />
+    <bpmn:sequenceFlow id="Flow_Sesiones_Detectar" sourceRef="Task_Sesiones" targetRef="Task_DetectarConflictos" />
+    <bpmn:sequenceFlow id="Flow_GWConf_No" name="No" sourceRef="GW_Conflictos" targetRef="Task_Disponibilidad" />
+    <bpmn:sequenceFlow id="Flow_Disp_GWAmb" sourceRef="Task_Disponibilidad" targetRef="GW_Ambientes" />
+    <bpmn:sequenceFlow id="Flow_GWAmb_Confirmar" name="Sí" sourceRef="GW_Ambientes" targetRef="Task_ConfirmarPublicacion" />
+    <bpmn:sequenceFlow id="Flow_Confirmar_Publicar" sourceRef="Task_ConfirmarPublicacion" targetRef="Task_PublicarHorario" />
+    <bpmn:sequenceFlow id="Flow_Publicar_Fichas" sourceRef="Task_PublicarHorario" targetRef="Task_ConsultarFichas" />
+    <bpmn:sequenceFlow id="Flow_Fichas_End" sourceRef="Task_ConsultarFichas" targetRef="EndEvent_1" />
+    <bpmn:sequenceFlow id="Flow_Detectar_GWConf" sourceRef="Task_DetectarConflictos" targetRef="GW_Conflictos" />
+    <bpmn:sequenceFlow id="Flow_GWConf_Panel" name="Sí" sourceRef="GW_Conflictos" targetRef="Task_PanelConflictos" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collab_Coordinador">
+      <bpmndi:BPMNShape id="Participant_Coordinador_di" bpmnElement="Participant_Coordinador" isHorizontal="true">
+        <dc:Bounds x="145" y="80" width="1900" height="560" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Sistema_di" bpmnElement="Lane_Sistema" isHorizontal="true">
+        <dc:Bounds x="175" y="360" width="1870" height="280" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Coordinador_di" bpmnElement="Lane_Coordinador" isHorizontal="true">
+        <dc:Bounds x="175" y="80" width="1870" height="280" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="215" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="202" y="235" width="65" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Dashboard_di" bpmnElement="Task_Dashboard">
+        <dc:Bounds x="295" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_HorarioExiste_di" bpmnElement="GW_HorarioExiste">
+        <dc:Bounds x="450" y="185" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="508" y="203" width="112" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CrearBorrador_di" bpmnElement="Task_CrearBorrador">
+        <dc:Bounds x="535" y="110" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AbrirHorario_di" bpmnElement="Task_AbrirHorario">
+        <dc:Bounds x="535" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Sesiones_di" bpmnElement="Task_Sesiones">
+        <dc:Bounds x="675" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Disponibilidad_di" bpmnElement="Task_Disponibilidad">
+        <dc:Bounds x="1215" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Ambientes_di" bpmnElement="GW_Ambientes">
+        <dc:Bounds x="1355" y="185" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1343" y="153" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ConfirmarPublicacion_di" bpmnElement="Task_ConfirmarPublicacion">
+        <dc:Bounds x="1445" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ConsultarFichas_di" bpmnElement="Task_ConsultarFichas">
+        <dc:Bounds x="1585" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="1725" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1700" y="235" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_DetectarConflictos_di" bpmnElement="Task_DetectarConflictos">
+        <dc:Bounds x="825" y="460" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Conflictos_di" bpmnElement="GW_Conflictos">
+        <dc:Bounds x="985" y="475" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="938" y="537" width="130" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_PanelConflictos_di" bpmnElement="Task_PanelConflictos">
+        <dc:Bounds x="1075" y="460" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_PublicarHorario_di" bpmnElement="Task_PublicarHorario">
+        <dc:Bounds x="1525" y="460" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_Borrador_di" bpmnElement="DataObjectReference_Borrador">
+        <dc:Bounds x="707" y="95" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="750" y="106" width="59" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_Publicado_di" bpmnElement="DataObjectReference_Publicado">
+        <dc:Bounds x="1557" y="385" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1533" y="363" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_Start_Dash_di" bpmnElement="Flow_Start_Dash">
+        <di:waypoint x="251" y="210" />
+        <di:waypoint x="295" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Dash_GWExiste_di" bpmnElement="Flow_Dash_GWExiste">
+        <di:waypoint x="395" y="210" />
+        <di:waypoint x="450" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_GWExiste_Crear_di" bpmnElement="Flow_GWExiste_Crear">
+        <di:waypoint x="475" y="185" />
+        <di:waypoint x="475" y="150" />
+        <di:waypoint x="535" y="150" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="482" y="158" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_GWExiste_Abrir_di" bpmnElement="Flow_GWExiste_Abrir">
+        <di:waypoint x="475" y="235" />
+        <di:waypoint x="475" y="270" />
+        <di:waypoint x="535" y="270" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="482" y="245" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Crear_Sesiones_di" bpmnElement="Flow_Crear_Sesiones">
+        <di:waypoint x="635" y="150" />
+        <di:waypoint x="655" y="150" />
+        <di:waypoint x="655" y="195" />
+        <di:waypoint x="675" y="195" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Abrir_Sesiones_di" bpmnElement="Flow_Abrir_Sesiones">
+        <di:waypoint x="635" y="270" />
+        <di:waypoint x="655" y="270" />
+        <di:waypoint x="655" y="225" />
+        <di:waypoint x="675" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Panel_Sesiones_di" bpmnElement="Flow_Panel_Sesiones">
+        <di:waypoint x="1130" y="460" />
+        <di:waypoint x="1130" y="350" />
+        <di:waypoint x="770" y="350" />
+        <di:waypoint x="770" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_GWAmb_Sesiones_di" bpmnElement="Flow_GWAmb_Sesiones">
+        <di:waypoint x="1380" y="235" />
+        <di:waypoint x="1380" y="315" />
+        <di:waypoint x="745" y="315" />
+        <di:waypoint x="745" y="250" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1020" y="297" width="124" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Sesiones_Detectar_di" bpmnElement="Flow_Sesiones_Detectar">
+        <di:waypoint x="725" y="250" />
+        <di:waypoint x="725" y="500" />
+        <di:waypoint x="825" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_GWConf_No_di" bpmnElement="Flow_GWConf_No">
+        <di:waypoint x="1010" y="475" />
+        <di:waypoint x="1010" y="210" />
+        <di:waypoint x="1215" y="210" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1016" y="236" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Disp_GWAmb_di" bpmnElement="Flow_Disp_GWAmb">
+        <di:waypoint x="1315" y="210" />
+        <di:waypoint x="1355" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_GWAmb_Confirmar_di" bpmnElement="Flow_GWAmb_Confirmar">
+        <di:waypoint x="1405" y="210" />
+        <di:waypoint x="1445" y="210" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1421" y="192" width="11" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Confirmar_Publicar_di" bpmnElement="Flow_Confirmar_Publicar">
+        <di:waypoint x="1495" y="250" />
+        <di:waypoint x="1495" y="500" />
+        <di:waypoint x="1525" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Publicar_Fichas_di" bpmnElement="Flow_Publicar_Fichas">
+        <di:waypoint x="1625" y="500" />
+        <di:waypoint x="1645" y="500" />
+        <di:waypoint x="1645" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Fichas_End_di" bpmnElement="Flow_Fichas_End">
+        <di:waypoint x="1685" y="210" />
+        <di:waypoint x="1725" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Detectar_GWConf_di" bpmnElement="Flow_Detectar_GWConf">
+        <di:waypoint x="925" y="500" />
+        <di:waypoint x="985" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_GWConf_Panel_di" bpmnElement="Flow_GWConf_Panel">
+        <di:waypoint x="1035" y="500" />
+        <di:waypoint x="1075" y="500" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1041" y="504" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutAssoc_Borrador_di" bpmnElement="DataOutAssoc_Borrador">
+        <di:waypoint x="725" y="170" />
+        <di:waypoint x="725" y="145" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutAssoc_Publicado_di" bpmnElement="DataOutAssoc_Publicado">
+        <di:waypoint x="1575" y="460" />
+        <di:waypoint x="1575" y="435" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
