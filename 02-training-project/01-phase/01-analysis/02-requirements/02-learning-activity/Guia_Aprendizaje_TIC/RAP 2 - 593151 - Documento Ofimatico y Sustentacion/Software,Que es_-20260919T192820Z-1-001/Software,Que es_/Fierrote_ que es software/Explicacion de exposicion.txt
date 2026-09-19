@@ -1,0 +1,89 @@
+Diapositiva 1 — Portada
+Lo que dices al abrir:
+
+"Hoy vamos a hablar de algo que usamos todo el tiempo pero que casi nadie puede definir con precisión: el software. No como usuarios, sino como futuros ingenieros. Vamos a entender su naturaleza, por qué es tan difícil de construir, y hacia dónde va la disciplina."
+
+
+Diapositiva 2 — Definición y Dualidad
+Concepto clave que transmites: El software no es solo "un programa". Es la capa de inteligencia que da sentido a la máquina.
+Lo que dices:
+
+"La definición técnica es: el software es el conjunto de instrucciones que gobiernan una máquina programable. Pero hay algo más profundo aquí. El hardware —el procesador, la RAM, el disco— es completamente inútil sin software. Es literalmente un teléfono muerto. No hace nada. Las instrucciones no tienen a quién dirigirse."
+
+
+"Ahora bien, hay un tercer elemento que casi ningún libro menciona en la portada: el Humanware. El sistema computacional completo no es Hardware + Software. Es Hardware + Software + el ser humano que le da propósito. Una app médica sin médicos, una app de música sin oyentes — no existe como sistema, solo como código."
+
+Pregunta para activar la clase:
+
+"¿Alguien puede darme un ejemplo donde el hardware y el software estén perfectos… pero el sistema falle igual por el factor humano?"
+
+
+Diapositiva 3 — Clasificación Técnica
+Concepto clave: Los tres tipos de software no son categorías académicas arbitrarias — tienen una relación jerárquica real.
+Lo que dices:
+
+"Hay tres categorías y tienen un orden lógico, no alfabético. Primero el Software de Sistema: sin él, el hardware no tiene lenguaje. El sistema operativo es el traductor entre tú y los transistores. Windows, Android, iOS — le dicen a tu app cómo hablar con la memoria, con la pantalla, con la red."
+
+
+"Sobre esa capa vive el Software de Aplicación: lo que el usuario final toca. VS Code, Photoshop, un videojuego. Este software no habla directamente con el hardware — le habla al sistema operativo y él traduce."
+
+
+"Y finalmente el más interesante para nosotros: el Software de Programación. Los compiladores, intérpretes, IDEs, depuradores. Este es el software que nos permite a nosotros crear más software. Es el único tipo que se construye a sí mismo. GCC compila C. La JVM ejecuta Java. Python fue escrito en C."
+
+
+"La ironía elegante: todo el software de aplicación que existe fue construido usando software de programación, que corre sobre software de sistema, que controla hardware. Es una pirámide de abstracción."
+
+
+Diapositiva 4 — La Naturaleza Invisible
+Concepto clave: El software es el artefacto más complejo que la humanidad ha construido, y su dificultad no es accidental.
+Lo que dices:
+
+"¿Por qué el software es tan difícil? No porque los programadores sean malos. Sino porque el software no obedece ninguna ley física. Un puente tiene límites de peso calculables. Un circuito tiene resistencia medible. ¿Cuánto pesa una función mal diseñada? No lo puedes medir con ningún instrumento."
+
+
+"Fred Brooks en 1987 hizo una distinción que sigue siendo válida hoy: la complejidad esencial versus la complejidad accidental. La esencial es la que viene del problema mismo — un sistema bancario es complejo porque el dominio bancario es complejo. Eso no desaparece con mejores herramientas. La accidental es la que nosotros introducimos: malos procesos, malos lenguajes, mala arquitectura. Esa sí se puede reducir."
+
+
+"Y aquí está la diferencia radical con la construcción civil: si construyes 1000 ladrillos, son idénticos. En software, casi no hay dos módulos iguales. Cada función resuelve un problema diferente. Eso hace que la experiencia no escale de la misma manera."
+
+
+Diapositiva 5 — Crisis del Software
+Concepto clave: Los problemas de hoy no son nuevos. La disciplina nació de un fracaso colectivo.
+Lo que dices:
+
+"A finales de los años 60, el mundo empezó a necesitar software grande: sistemas militares, bancarios, aeroespaciales. Y la industria colapsó. El 80% de los proyectos llegaban tarde o fuera de presupuesto. El 40% nunca se entregó. No porque los programadores fueran incompetentes — sino porque nadie sabía cómo gestionar la construcción de algo invisible y sin precedente."
+
+
+"De esa crisis nació el término 'Ingeniería de Software' — en una conferencia de la OTAN en 1968. La idea era: necesitamos aplicar principios de ingeniería al software, porque improvisar ya demostró que no funciona a escala."
+
+
+"Fred Brooks publicó en 1987 su ensayo más famoso: No Silver Bullet. Su tesis: no existe ninguna tecnología, lenguaje o metodología que por sí sola elimine la dificultad intrínseca de diseñar software. Cuarenta años después, con inteligencia artificial, con nube, con todo — la premisa sigue siendo verdad. Las herramientas mejoran. El problema de fondo no desaparece."
+
+Punto de reflexión:
+
+"¿Qué creen que cambió entre los proyectos que fallaban en los 60 y cómo trabajamos hoy?"
+
+
+Diapositiva 6 — Tendencias Modernas
+Concepto clave: La industria respondió a la complejidad con automatización y colaboración.
+Lo que dices:
+
+"La respuesta moderna a la complejidad accidental tiene dos pilares. El primero es CI/CD — Integración y Despliegue Continuos. La idea es simple: en vez de integrar el trabajo de todos los programadores al final del proyecto —cuando los conflictos son enormes— integramos todo el tiempo, automáticamente, y desplegamos automáticamente."
+
+
+"El impacto medido es concreto: equipos que adoptan CI/CD bien implementado pasan de 1.5 defectos por cada mil líneas de código a 0.5. Y el tiempo de llevar una feature al mercado cae de 6 semanas a 2. No porque la gente trabaje más rápido — sino porque la automatización elimina los errores que se cometían manualmente."
+
+
+"El segundo pilar es el Modelado Colaborativo. Herramientas como COMA permiten que equipos distribuidos construyan modelos UML juntos, negociando en tiempo real. ¿Por qué importa? Porque la mayoría de los errores costosos no se cometen al programar — se cometen al diseñar. Si el modelo es incorrecto, todo lo que se construye sobre él también lo es. Detectar eso antes de escribir la primera línea de código vale más que cualquier corrección posterior."
+
+
+Diapositiva 7 — Cierre
+Lo que dices para cerrar fuerte:
+
+"El software no se fabrica como se fabrica un tornillo. No hay molde. No hay línea de ensamblaje. Se construye, se cultiva, y — lo más importante — constantemente evoluciona."
+
+
+"Como ingenieros de software, somos posiblemente los únicos artesanos en la historia que construimos con pensamiento puro. Sin materia prima física. Sin límites de gravedad. Eso es una libertad enorme — y también la fuente de toda la complejidad que vimos hoy."
+
+
+"La pregunta que deben llevarse no es '¿cómo programo mejor?' sino '¿cómo pienso mejor sobre los problemas que el software debe resolver?'"
