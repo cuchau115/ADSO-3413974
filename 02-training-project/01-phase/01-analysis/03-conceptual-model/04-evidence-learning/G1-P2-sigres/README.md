@@ -23,11 +23,11 @@
 
 | # | Artefacto | Qué cambié y por qué | Enlace al commit |
 |---|---|---|---|
-| 1 | Identificadores y referencias del SRS | Normalicé las referencias RF16/RF17, RF08/RF09 y RF04 para mantener una trazabilidad consistente y corregir referencias cruzadas ambiguas. | [ENLACE_COMMIT] |
-| 2 | Diagramas de actividades | Adapté los procesos de pedido y consulta QR a UML de actividades, incluyendo decisiones con guardas, flujos alternos y excepciones visibles en las plantillas. | [ENLACE_COMMIT] |
-| 3 | Modelo de dominio | Organicé 11 clases conceptuales, 5 generalizaciones y una asociación Pedido-Producto sin métodos ni atributos técnicos. | [ENLACE_COMMIT] |
-| 4 | MER y trazabilidad | Resolví el pedido N:M con una entidad asociativa y añadí matriz completa de los 17 RF hasta modelo de datos y pantalla crítica. | [ENLACE_COMMIT] |
-| 5 | Verificación | Registré hallazgos, correcciones y segunda verificación en la lista de chequeo y el registro de ajustes. | [ENLACE_COMMIT] |
+| 1 | Identificadores y referencias del SRS | Normalicé las referencias RF16/RF17, RF08/RF09 y RF04 para mantener una trazabilidad consistente y corregir referencias cruzadas ambiguas. | [ENLACE_COMMIT](https://github.com/cuchau115/ADSO-3413974/commit/f16ce37d2d5a3427f36af28183228650ba0ff8c8) |
+| 2 | Diagramas de actividades | Adapté los procesos de pedido y consulta QR a UML de actividades, incluyendo decisiones con guardas, flujos alternos y excepciones visibles en las plantillas. | [ENLACE_COMMIT](https://github.com/cuchau115/ADSO-3413974/commit/f16ce37d2d5a3427f36af28183228650ba0ff8c8)  |
+| 3 | Modelo de dominio | Organicé 11 clases conceptuales, 5 generalizaciones y una asociación Pedido-Producto sin métodos ni atributos técnicos. | [ENLACE_COMMIT](https://github.com/cuchau115/ADSO-3413974/commit/f16ce37d2d5a3427f36af28183228650ba0ff8c8)  |
+| 4 | MER y trazabilidad | Resolví el pedido N:M con una entidad asociativa y añadí matriz completa de los 17 RF hasta modelo de datos y pantalla crítica. | [ENLACE_COMMIT](https://github.com/cuchau115/ADSO-3413974/commit/f16ce37d2d5a3427f36af28183228650ba0ff8c8)  |
+| 5 | Verificación | Registré hallazgos, correcciones y segunda verificación en la lista de chequeo y el registro de ajustes. | [ENLACE_COMMIT](https://github.com/cuchau115/ADSO-3413974/commit/f16ce37d2d5a3427f36af28183228650ba0ff8c8)  |
 
 ## 4. Qué construí nuevo
 
@@ -72,8 +72,8 @@
 
 ## 8. Autocontrol antes del push
 
-- [ ] Tengo commits propios publicados en al menos 2 días distintos.
-- [ ] Todos los artefactos obligatorios alcanzan sus cantidades mínimas.
-- [ ] Puedo explicar las relaciones UML, las reglas QR y las multiplicidades del dominio.
-- [ ] La matriz trazó al menos el 90 % de los 17 RF.
-- [ ] Hice push y comprobé la carpeta publicada en GitHub.
+- [ x ] Tengo commits propios publicados en al menos 2 días distintos.
+- [ x ] Todos los artefactos obligatorios alcanzan sus cantidades mínimas.
+- [  ] Puedo explicar las relaciones UML, las reglas QR y las multiplicidades del dominio.
+- [ x ] La matriz trazó al menos el 90 % de los 17 RF.
+- [ x ] Hice push y comprobé la carpeta publicada en GitHub.
