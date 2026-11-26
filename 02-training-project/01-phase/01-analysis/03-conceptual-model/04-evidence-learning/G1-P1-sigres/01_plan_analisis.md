@@ -77,3 +77,10 @@ Las fechas son objetivos del plan, no evidencia de que las actividades ya estén
 - Revisar también las referencias cruzadas de RF05 y RF07 antes de congelar la matriz.
 
 Estas observaciones no cambian los identificadores de la matriz; señalan referencias que conviene validar con el instructor o el equipo.
+
+## E. Decisiones y justificación de relaciones UML
+
+- **`CU-04 Registrar pedido` «include» → `CU-05 Enviar pedido a cocina`:** el SRS indica que la comanda se envía automáticamente al registrar el pedido; por eso es un comportamiento obligatorio del caso base.
+- **`CU-17 Consultar consumo actual` «extend» → `CU-16 Ver menú digital por QR` [pedido activo]:** consultar el consumo es una opción condicional disponible al cliente cuando la mesa tiene un pedido activo.
+
+La relación `include` parte del caso base hacia el caso incluido. La relación `extend` parte del caso opcional hacia el caso base.
