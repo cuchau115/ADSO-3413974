@@ -59,6 +59,6 @@
 
 ## 8. Autocontrol antes del push
 
-- [ ] Haré commits propios en al menos dos días distintos entre el 21 y el 28 de noviembre de 2026.
-- [ ] No subiré el material documental del instructor, plantillas sin diligenciar ni trabajo ajeno.
-- [ ] Haré `push` y comprobaré en GitHub que la carpeta está publicada.
+- [ x ] Haré commits propios en al menos dos días distintos entre el 21 y el 28 de noviembre de 2026.
+- [ x ] No subiré el material documental del instructor, plantillas sin diligenciar ni trabajo ajeno.
+- [ x ] Haré `push` y comprobaré en GitHub que la carpeta está publicada.
