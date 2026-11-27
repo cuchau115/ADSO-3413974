@@ -37,9 +37,9 @@ Cambios con enlaces:
 
 | # | Cambio | Enlace |
 |---|---|---|
-| 1 | Ajuste del MER a relaciones 1:N y N:M | [ENLACE_COMMIT_G2](ENLACE_COMMIT_G2) |
-| 2 | Normalización 0FN-3FN y reglas de transformación | [ENLACE_COMMIT_G2](ENLACE_COMMIT_G2) |
-| 3 | Script SQL, seguridad y verificación | [ENLACE_COMMIT_G2](ENLACE_COMMIT_G2) |
+| 1 | Ajuste del MER a relaciones 1:N y N:M | [30e8e51](https://github.com/cuchau115/ADSO-3413974/commit/30e8e51) |
+| 2 | Normalización 0FN-3FN y reglas de transformación | [30e8e51](https://github.com/cuchau115/ADSO-3413974/commit/30e8e51) |
+| 3 | Script SQL, seguridad y verificación | [30e8e51](https://github.com/cuchau115/ADSO-3413974/commit/30e8e51) |
 
 ## 4. Artefactos entregados
 

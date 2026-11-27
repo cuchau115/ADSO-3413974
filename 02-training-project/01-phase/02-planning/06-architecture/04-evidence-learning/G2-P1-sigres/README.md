@@ -29,6 +29,14 @@
 | Despliegue | `06-vista-despliegue.md` | Nuevo | Se definieron 3 nodos, artefactos y protocolos |
 | Trazabilidad | `07-matriz-trazabilidad.md` | G1 matrices | Se llevó cada requisito a clase, tabla y componente |
 
+Cambios con enlaces reales:
+
+| # | Cambio | Commit |
+|---|---|---|
+| 1 | Diseño de clases y patrones | [30e8e51](https://github.com/cuchau115/ADSO-3413974/commit/30e8e51) |
+| 2 | Arquitectura y componentes | [30e8e51](https://github.com/cuchau115/ADSO-3413974/commit/30e8e51) |
+| 3 | Despliegue y trazabilidad | [30e8e51](https://github.com/cuchau115/ADSO-3413974/commit/30e8e51) |
+
 **Qué reutilicé:** los 17 RF, 31 RNF, actores y modelo conceptual de G1.
 
 **Qué ajusté:** convertí conceptos de negocio en clases diseñadas con responsabilidades, tipos, multiplicidades y decisiones técnicas trazables.
