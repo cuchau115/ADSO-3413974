@@ -1,0 +1,6 @@
+Fecha de ejecución: 2026-11-27
+Motor: SQLite 3
+Resultado: SQLite execution: OK
+Tablas creadas: 12
+Claves foráneas declaradas: 10
+Método: executescript() sobre modelo-sigres.sql en memoria

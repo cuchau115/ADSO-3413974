@@ -1,0 +1,17 @@
+classDiagram
+  Usuario <|-- Administrador
+  Usuario <|-- Mesero
+  Usuario <|-- Cajero
+  Usuario <|-- Cocinero
+  Usuario "1" --> "1" Rol
+  Mesa "1" *-- "0..*" Pedido
+  Pedido "1" *-- "1..*" LineaPedido
+  Producto "1" --> "0..*" LineaPedido
+  Categoria "1" --> "0..*" Producto
+  Pedido "1" --> "0..1" Factura
+  Factura "1" --> "1" Pago
+  Producto "1" --> "1" Inventario
+  Inventario "1" --> "0..*" MovimientoInventario
+  Pedido ..> ICalculadoraFactura
+  ICalculadoraFactura <|.. CalculadoraIVA
+  ICalculadoraFactura <|.. CalculadoraPromocional

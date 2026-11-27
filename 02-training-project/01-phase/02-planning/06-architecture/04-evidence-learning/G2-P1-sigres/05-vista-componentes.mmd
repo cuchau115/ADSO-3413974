@@ -1,0 +1,14 @@
+flowchart LR
+  UI[Interfaz web] -->|IIdentidad| AUTH[Componente autenticacion]
+  UI -->|IPedidos| PED[Componente pedidos]
+  UI -->|IMenuQR| QR[Componente menu QR]
+  UI -->|IFacturacion| FAC[Componente facturacion]
+  UI -->|IReportes| REP[Componente reportes]
+  PED -->|IInventario| INV[Componente inventario]
+  PED -->|ICocina| COC[Servicio cocina]
+  PED -->|IDatos| DB[(PostgreSQL)]
+  QR -->|IConsumo| DB
+  INV -->|IDatos| DB
+  FAC -->|IPagos| PAG[Pasarela o caja]
+  FAC -->|IDatos| DB
+  REP -->|IDatos| DB

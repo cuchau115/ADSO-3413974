@@ -1,0 +1,4 @@
+flowchart LR
+  C[Nodo cliente: navegador] -- HTTPS 443 y TLS --> A[Nodo aplicacion: Spring Boot]
+  A -- TCP 5432 red privada --> D[(Nodo datos: PostgreSQL)]
+  D -- Backup cifrado diario --> B[(Nodo respaldo)]

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300">
+<rect width="900" height="300" fill="white"/>
+<g font-family="Arial" font-size="16" fill="#111" stroke="#222" stroke-width="2">
+<rect x="30" y="90" width="220" height="100" fill="#eef5ff"/><text x="140" y="135" text-anchor="middle" stroke="none">Nodo cliente</text><text x="140" y="160" text-anchor="middle" stroke="none">Navegador responsive</text>
+<rect x="340" y="90" width="220" height="100" fill="#fff8e8"/><text x="450" y="135" text-anchor="middle" stroke="none">Nodo aplicacion</text><text x="450" y="160" text-anchor="middle" stroke="none">Spring Boot REST</text>
+<rect x="650" y="90" width="220" height="100" fill="#efffee"/><text x="760" y="135" text-anchor="middle" stroke="none">Nodo datos</text><text x="760" y="160" text-anchor="middle" stroke="none">PostgreSQL</text>
+<line x1="250" y1="140" x2="340" y2="140"/><text x="295" y="125" text-anchor="middle" stroke="none">HTTPS/TLS 443</text>
+<line x1="560" y1="140" x2="650" y2="140"/><text x="605" y="125" text-anchor="middle" stroke="none">TCP 5432</text>
+</g>
+</svg>
